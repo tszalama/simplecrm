@@ -1,5 +1,6 @@
-package com.simplecrm.crm.customer;
+package com.simplecrm.api.customer.repository;
 
+import com.simplecrm.api.customer.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

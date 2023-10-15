@@ -1,4 +1,4 @@
-package com.simplecrm.crm.pagination;
+package com.simplecrm.api.response;
 
 import org.springframework.data.domain.Page;
 
@@ -11,13 +11,7 @@ public class PaginationResponse<T> {
     private int totalPages;
     private long totalElements;
 
-    public PaginationResponse(Page<T> page, List<T> content) {
-        this.content = content;
-        this.page = page.getNumber();
-        this.pageSize = page.getSize();
-        this.totalPages = page.getTotalPages();
-        this.totalElements = page.getTotalElements();
-    }
+    public PaginationResponse() {}
 
     public List<T> getContent() {
         return content;

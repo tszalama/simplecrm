@@ -1,4 +1,4 @@
-package com.simplecrm.crm;
+package com.simplecrm.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

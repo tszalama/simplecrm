@@ -1,19 +1,14 @@
-package com.simplecrm.crm.customer;
+package com.simplecrm.api.customer.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CustomerDto {
     private Long id;
     private String name;
     private String email;
 
-    public Customer() {}
+    public CustomerDto() {}
 
-    public Customer(String name, String email) {
+    public CustomerDto(Long id, String name, String email) {
+        this.id = id;
         this.name = name;
         this.email = email;
     }
@@ -44,7 +39,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "CustomerDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
