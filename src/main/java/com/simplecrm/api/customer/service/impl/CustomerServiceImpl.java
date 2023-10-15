@@ -1,6 +1,7 @@
 package com.simplecrm.api.customer.service.impl;
 
 import com.simplecrm.api.customer.dto.CustomerDto;
+import com.simplecrm.api.customer.exceptions.CustomerNotFoundException;
 import com.simplecrm.api.customer.model.Customer;
 import com.simplecrm.api.customer.repository.CustomerRepository;
 import com.simplecrm.api.customer.service.CustomerService;
@@ -53,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDto updateCustomer(Long customerId,CustomerDto customerDto) {
         final Customer existingCustomer = repository.findById(customerId).orElseThrow(
-                () -> new IllegalStateException("customer with id " + customerId + " does not exist")
+                () -> new CustomerNotFoundException("Customer with id " + customerId + " does not exist")
         );
         if(customerDto.getName() != null){
             existingCustomer.setName(customerDto.getName());
