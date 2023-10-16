@@ -1,4 +1,4 @@
-package com.simplecrm.api.customer.exceptions;
+package com.simplecrm.api.customer.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +21,17 @@ public class GlobalExceptionHandler {
         errorObject.setTimestamp(new Date());
 
         return new ResponseEntity<ErrorObject>(errorObject, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SalesOrderNotFoundException.class)
+    public ResponseEntity<ErrorObject> handleSalesOrderNotFouncException(SalesOrderNotFoundException ex, WebRequest request) {
+        ErrorObject errorObject = new ErrorObject();
+
+        errorObject.setStatusCode(HttpStatus.NOT_FOUND.value());
+        errorObject.setMessage(ex.getMessage());
+        errorObject.setTimestamp(new Date());
+
+        return new ResponseEntity<ErrorObject>(errorObject,HttpStatus.NOT_FOUND);
     }
 
 }

@@ -1,11 +1,11 @@
 package com.simplecrm.api.customer.service.impl;
 
 import com.simplecrm.api.customer.dto.CustomerDto;
-import com.simplecrm.api.customer.exceptions.CustomerNotFoundException;
+import com.simplecrm.api.customer.exception.CustomerNotFoundException;
 import com.simplecrm.api.customer.model.Customer;
 import com.simplecrm.api.customer.repository.CustomerRepository;
 import com.simplecrm.api.customer.service.CustomerService;
-import com.simplecrm.api.response.PaginationResponse;
+import com.simplecrm.api.customer.dto.PaginationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -62,6 +62,14 @@ public class CustomerServiceImpl implements CustomerService {
         if(customerDto.getEmail() != null){
             existingCustomer.setEmail(customerDto.getEmail());
         }
+        return mapToDto(existingCustomer);
+    }
+
+    @Override
+    public CustomerDto getCustomerById(Long customerId) {
+        final Customer existingCustomer = repository.findById(customerId).orElseThrow(
+                () -> new CustomerNotFoundException("Customer with id " + customerId + " does not exist")
+        );
         return mapToDto(existingCustomer);
     }
 

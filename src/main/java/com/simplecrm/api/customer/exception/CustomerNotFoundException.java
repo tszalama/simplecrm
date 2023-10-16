@@ -1,4 +1,4 @@
-package com.simplecrm.api.customer.exceptions;
+package com.simplecrm.api.customer.exception;
 
 public class CustomerNotFoundException extends RuntimeException {
     private static final long serialVerisionUID  = 1;

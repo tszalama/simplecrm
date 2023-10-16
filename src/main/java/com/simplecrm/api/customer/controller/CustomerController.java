@@ -1,9 +1,9 @@
 package com.simplecrm.api.customer.controller;
 
 import com.simplecrm.api.customer.dto.CustomerDto;
+import com.simplecrm.api.customer.service.CustomerService;
 import com.simplecrm.api.customer.service.impl.CustomerServiceImpl;
-import com.simplecrm.api.customer.model.Customer;
-import com.simplecrm.api.response.PaginationResponse;
+import com.simplecrm.api.customer.dto.PaginationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
-    private final CustomerServiceImpl customerService;
+    private final CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerServiceImpl customerService) {
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -25,6 +25,13 @@ public class CustomerController {
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize){
         return new ResponseEntity<>(customerService.getCustomers(page, pageSize), HttpStatus.OK);
     }
+
+    @GetMapping(path= "{customerId}")
+    public  ResponseEntity<CustomerDto> getCustomerById(
+            @PathVariable("customerId") Long customerId) {
+        return new ResponseEntity<>(customerService.getCustomerById(customerId), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<CustomerDto> createCustomer(
             @RequestBody CustomerDto customerDto) {

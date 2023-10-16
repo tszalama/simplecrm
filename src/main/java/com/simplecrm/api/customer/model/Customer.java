@@ -2,6 +2,9 @@ package com.simplecrm.api.customer.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table
 public class Customer {
@@ -10,6 +13,8 @@ public class Customer {
     private Long id;
     private String name;
     private String email;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<SalesOrder> salesOrders = new ArrayList<SalesOrder>();
 
     public Customer() {}
 
@@ -41,6 +46,14 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<SalesOrder> getSalesOrders() {
+        return salesOrders;
+    }
+
+    public void setSalesOrders(List<SalesOrder> salesOrders) {
+        this.salesOrders = salesOrders;
     }
 
     @Override

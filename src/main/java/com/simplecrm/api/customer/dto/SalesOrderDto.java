@@ -1,5 +1,6 @@
 package com.simplecrm.api.customer.dto;
 
+import com.simplecrm.api.customer.model.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDto {
+public class SalesOrderDto {
     private Long id;
-    private String name;
-    private String email;
+    private String title;
+    private Long customerId;
 }

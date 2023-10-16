@@ -1,4 +1,4 @@
-package com.simplecrm.api.customer.exceptions;
+package com.simplecrm.api.customer.exception;
 
 import lombok.Data;
 
