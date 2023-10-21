@@ -15,7 +15,9 @@ const useFetchPage = (url, initialPage, initialPageSize) => {
 
     const fetchPage = async () => {
         try{
-            const res = await fetch(url + `?page=${page}&pageSize=${pageSize}`);
+            const paramStart = url.includes('?') ? '&' : '?';
+            const ulrParams = `page=${page}&pageSize=${pageSize}`;
+            const res = await fetch(url + paramStart + ulrParams);
             if(!res) {
                 throw Error('could not fetch data from resource')
             }
@@ -32,6 +34,7 @@ const useFetchPage = (url, initialPage, initialPageSize) => {
     useEffect(() => {
         fetchPage();
     }, [refresh]);
+
     return {data, isLoading, error, refreshData, setPage, setPageSize}
 }
 
