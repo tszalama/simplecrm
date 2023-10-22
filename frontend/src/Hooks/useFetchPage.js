@@ -18,8 +18,8 @@ const useFetchPage = (url, initialPage, initialPageSize) => {
             const paramStart = url.includes('?') ? '&' : '?';
             const ulrParams = `page=${page}&pageSize=${pageSize}`;
             const res = await fetch(url + paramStart + ulrParams);
-            if(!res) {
-                throw Error('could not fetch data from resource')
+            if(!res.ok) {
+                throw Error('could not get data from resource')
             }
             const data = await res.json();
             setData(data);
@@ -27,6 +27,7 @@ const useFetchPage = (url, initialPage, initialPageSize) => {
             setError(false);
         } catch (e) {
             setError(true);
+            setIsLoading(false);
             console.log(e);
         }
     }

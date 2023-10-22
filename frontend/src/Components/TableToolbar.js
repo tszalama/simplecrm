@@ -18,7 +18,6 @@ export default function TableToolbar ( {title, handleCreation, handleSearch} ) {
 
     const handleSearchTextChange = (e) => {
         setSearchText(e.target.value);
-        console.log(searchText);
     }
 
     return (

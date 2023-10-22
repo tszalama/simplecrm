@@ -7,7 +7,8 @@ import { Container } from '@mui/material';
 import Box from '@mui/material/Box'
 import Navbar from './Navbar';
 import CustomerDetails from './Customers/CustomerDetails';
-import Customers from './Customers/Customers';
+import CustomerCreation from './Customers/CustomerCreation';
+import CustomerTable from './Customers/CustomerTable';
 
 function App() {
     return (
@@ -16,11 +17,13 @@ function App() {
             <Container>
                 <Box sx={{ pt: 15}}>
                     <Routes>
+                        <Route path='/' element={<Home />} />
                         <Route path='/Home' element={<Home />} />
                         <Route path='/Orders' element={<Orders />} />
                         <Route path='/Orders/:id' element={<OrderDetails />} />
-                        <Route path='/Customers' element={<Customers />} />
-                        <Route path='/Customers/:id' element={<CustomerDetails />} />
+                        <Route path='/Customers' element={<CustomerTable />} />
+                        <Route path='/Customers/:idParam' element={<CustomerDetails />} />
+                        <Route path='/CustomerCreation' element={<CustomerCreation />} />
                         <Route path='*' element={<NotFound />} />
                         <Route />
                     </Routes>

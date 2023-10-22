@@ -14,8 +14,8 @@ const useFetch = (url) => {
     const fetchItem = async () => {
         try {
             const res = await fetch(url);
-            if(!res) {
-                throw Error('could not fetch data from resource')
+            if(!res.ok) {
+                throw Error('could not get data from resource')
             }
             const data = await res.json();
             setData(data);

@@ -1,14 +1,34 @@
 import * as React from 'react';
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, Tab } from '@mui/material';
+import useFetchPage from "../Hooks/useFetchPage";
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, Tab, Typography } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from '../styles.css';
+import CircularProgress from '@mui/material/CircularProgress';
+import TableToolbar from '../Components/TableToolbar';
 
-export default function CustomerTable({ data }) {
+export default function CustomerTable({hideToolbar}) {
+
+    const navigate = useNavigate();
+
+    const { data, isLoading, error, refreshData, setPage, setPageSize} = useFetchPage('http://localhost:8080/api/v1/customer', 0, 10);
+
+    const handleCreation = () =>{
+        navigate('/CustomerCreation');
+    };
+
+    const handleSearch = (text) => {
+        console.log(text);
+    }
+
     return (
         <>  
+            {isLoading && <CircularProgress />}
+            {error &&  <Typography>Error while loading data</Typography>}
+            {!hideToolbar && <TableToolbar title="Customers" handleCreation={handleCreation} handleSearch={handleSearch} />}
             {
-                data &&
+                data && data.content &&
                 <>
                     <TableContainer component={Paper}>
                         <Table>
@@ -22,7 +42,7 @@ export default function CustomerTable({ data }) {
                             </TableHead>
                             <TableBody>
                                 {
-                                    data.map(row => (
+                                    data.content.map(row => (
                                         <TableRow key={row.id}>
                                             <TableCell style={{ width: 30 }}>
                                                 <Link to={`/Customers/${row.id}`} className='icon-link'>
